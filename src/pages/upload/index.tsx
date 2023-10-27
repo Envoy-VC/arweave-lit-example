@@ -6,7 +6,7 @@ import { UploadFiles, ControlTabs } from '~/components';
 
 const Upload: NextPageWithLayout = () => {
 	return (
-		<div className='mx-auto my-24 flex max-w-screen-lg flex-col gap-4 border-2 p-2'>
+		<div className='m-2 my-24 flex max-w-screen-lg flex-col gap-4 border-2 p-2 sm:mx-auto'>
 			<div className='flex flex-col gap-4'>
 				<div className='text-2xl font-semibold'>Upload Image</div>
 				<UploadFiles />

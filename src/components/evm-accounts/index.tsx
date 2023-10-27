@@ -9,7 +9,7 @@ import { useUploadStore } from '~/stores';
 import { TbTrashFilled } from 'react-icons/tb';
 
 const EVMAccounts = () => {
-	const { accessControlConditions, setAccessControlConditions } =
+	const { type, accessControlConditions, setAccessControlConditions } =
 		useUploadStore();
 	const [address, setAddress] = React.useState<string>('');
 
@@ -87,30 +87,34 @@ const EVMAccounts = () => {
 				</Button>
 			</div>
 			<div className='flex flex-col'>
-				{accessControlConditions
-					.filter((value, index) => index % 2 === 0)
-					.map((value, index) => {
-						const {
-							returnValueTest: { value: address },
-						} = value as AccsRegularParams;
-						return (
-							<div key={index} className='max-w-xl border-b-[1px] border-gray-300 p-1'>
-								<div className='flex flex-row items-center justify-between'>
-									<div className='hidden text-sm font-medium text-slate-700 sm:flex'>
-										{address}
+				{type === 'evm-accounts' &&
+					accessControlConditions
+						?.filter((value, index) => index % 2 === 0)
+						?.map((value, index) => {
+							const {
+								returnValueTest: { value: address },
+							} = value as AccsRegularParams;
+							return (
+								<div
+									key={index}
+									className='max-w-xl border-b-[1px] border-gray-300 p-1'
+								>
+									<div className='flex flex-row items-center justify-between'>
+										<div className='hidden text-sm font-medium text-slate-700 sm:flex'>
+											{address}
+										</div>
+										<div className='flex text-sm font-medium text-slate-700 sm:hidden'>
+											{address.slice(0, 6) + '...' + address.slice(-6)}
+										</div>
+										<Button
+											type='text'
+											icon={<TbTrashFilled size={16} className='text-red-500' />}
+											onClick={() => onDelete([value])}
+										/>
 									</div>
-									<div className='flex text-sm font-medium text-slate-700 sm:hidden'>
-										{address.slice(0, 6) + '...' + address.slice(-6)}
-									</div>
-									<Button
-										type='text'
-										icon={<TbTrashFilled size={16} className='text-red-500' />}
-										onClick={() => onDelete([value])}
-									/>
 								</div>
-							</div>
-						);
-					})}
+							);
+						})}
 			</div>
 		</div>
 	);

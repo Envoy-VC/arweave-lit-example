@@ -18,8 +18,8 @@ const items: Tab[] = [
 		children: <EVMAccounts />,
 	},
 	{
-		label: 'Token Holders',
-		key: 'token-holders',
+		label: 'ERC-721 Holder',
+		key: 'erc721-holder',
 		children: <TokenHolders />,
 	},
 	{
@@ -30,10 +30,13 @@ const items: Tab[] = [
 ];
 
 const ControlTabs = () => {
-	const { setAccessControlConditions } = useUploadStore();
+	const { setAccessControlConditions, setType } = useUploadStore();
 	return (
 		<Tabs
-			onChange={() => setAccessControlConditions([])}
+			onChange={(activeKey) => {
+				setType(activeKey);
+				setAccessControlConditions([]);
+			}}
 			defaultActiveKey='evm-accounts'
 			type='card'
 			size='large'
