@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, message, Upload } from 'antd';
 
+import { useUploadStore } from '~/stores';
 // Icons
 import { TbInbox } from 'react-icons/tb';
 
@@ -9,7 +10,7 @@ import type { UploadProps, UploadFile } from 'antd';
 import type { RcFile } from 'antd/es/upload';
 
 const UploadFiles = () => {
-	const [fileList, setFileList] = React.useState<UploadFile[]>([]);
+	const { image, setImage } = useUploadStore();
 	const [b64Image, setB64Image] = React.useState<string>('');
 
 	function convertImageToBase64(file: RcFile) {
@@ -22,16 +23,16 @@ const UploadFiles = () => {
 	const props: UploadProps = {
 		name: 'file',
 		multiple: false,
-		fileList,
+		fileList: image ? [image] : [],
 		accept: 'image/*',
 		listType: 'picture-card',
 		prefixCls: '!w-full',
 		showUploadList: false,
 		onRemove: () => {
-			setFileList([]);
+			setImage(null);
 		},
 		beforeUpload: (file) => {
-			setFileList([file]);
+			setImage(file);
 			convertImageToBase64(file);
 			return false;
 		},
@@ -50,23 +51,23 @@ const UploadFiles = () => {
 					</div>
 				</div>
 			</Upload.Dragger>
-			{fileList.at(0) && (
+			{image && (
 				<div className='flex w-full flex-row gap-4'>
 					<Image
 						src={b64Image}
-						alt={fileList.at(0)?.fileName}
-						className='max-h-64 sm:max-h-36 w-full max-w-[14rem] rounded-lg object-cover'
+						alt={image.name}
+						className='max-h-64 w-full max-w-[14rem] rounded-lg object-cover sm:max-h-36'
 					/>
 					<div className='flex flex-col text-[1rem] text-slate-700'>
 						<div>
 							<span className='font-medium'>File Name: </span>
-							{fileList.at(0)?.name}
+							{image.name}
 						</div>
 						<div>
 							<span className='font-medium'>File Size: </span>
-							{(fileList.at(0)?.size ?? 0) > 1024 * 1024
-								? ((fileList?.at(0)?.size ?? 0) / 1024 / 1024).toFixed(2) + 'mb'
-								: ((fileList?.at(0)?.size ?? 0) / 1024).toFixed(2) + 'kb'}
+							{(image.size ?? 0) > 1024 * 1024
+								? ((image.size ?? 0) / 1024 / 1024).toFixed(2) + 'mb'
+								: ((image.size ?? 0) / 1024).toFixed(2) + 'kb'}
 						</div>
 					</div>
 				</div>

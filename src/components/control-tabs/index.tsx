@@ -1,8 +1,10 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import type { TabPaneProps } from 'antd';
-
+import { useUploadStore } from '~/stores';
 import EVMAccounts from '../evm-accounts';
+import TokenHolders from '../token-holders';
+import CustomConditions from '../custom-conditions';
 
 export interface Tab extends Omit<TabPaneProps, 'tab'> {
 	key: string;
@@ -18,18 +20,20 @@ const items: Tab[] = [
 	{
 		label: 'Token Holders',
 		key: 'token-holders',
-		children: 'Token Holders',
+		children: <TokenHolders />,
 	},
 	{
 		label: 'Custom Conditions',
 		key: 'custom',
-		children: 'Custom Conditions',
+		children: <CustomConditions />,
 	},
 ];
 
 const ControlTabs = () => {
+	const { setAccessControlConditions } = useUploadStore();
 	return (
 		<Tabs
+			onChange={() => setAccessControlConditions([])}
 			defaultActiveKey='evm-accounts'
 			type='card'
 			size='large'
