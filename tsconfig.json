@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-, "color-pallette.js"  ],
+, "color-pallette.js", "src/helpers/index.js"  ],
   "exclude": ["node_modules"]
 }

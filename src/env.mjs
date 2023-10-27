@@ -12,7 +12,7 @@ export const env = createEnv({
 	 * Runtime Environment Variables (prefixed with `NEXT_PUBLIC_`)
 	 */
 	experimental__runtimeEnv: {
-		NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID:
+		NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID:
 			process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
 	},
 	/**
