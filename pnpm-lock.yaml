@@ -12,8 +12,8 @@ dependencies:
     specifier: 3.0.2
     version: 3.0.2(@ethersproject/contracts@5.7.0)(@ethersproject/hash@5.7.0)(@ethersproject/providers@5.7.2)(@ethersproject/wallet@5.7.0)(react@18.2.0)
   '@lit-protocol/types':
-    specifier: '3'
-    version: 3.0.2
+    specifier: ^3.0.14
+    version: 3.0.14
   '@t3-oss/env-nextjs':
     specifier: ^0.7.1
     version: 0.7.1(typescript@5.2.2)(zod@3.22.4)
@@ -846,6 +846,16 @@ packages:
       - utf-8-validate
     dev: false
 
+  /@lit-protocol/auth-helpers@3.0.14(ethers@5.7.2):
+    resolution: {integrity: sha512-NVRKLPTF/ZWUMjtBLpE2+NGGw8QcJY/lFEbRudmCO3U+BVAiCRwvEBn7J139175DsW/kemV8ovybo2qVkxhYMg==}
+    dependencies:
+      siwe: 2.1.4(ethers@5.7.2)
+      siwe-recap: 0.0.2-alpha.0(ethers@5.7.2)
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - ethers
+    dev: false
+
   /@lit-protocol/auth-helpers@3.0.2(ethers@5.7.2):
     resolution: {integrity: sha512-mrCdX+9st2BGYL8ksf3SsSZjyqgNocRK6Js6r1DuZpy9xKKX+5bt3aThlWvgyBUWKOSPflUU4n+VS107JC8eOw==}
     dependencies:
@@ -1098,6 +1108,20 @@ packages:
     resolution: {integrity: sha512-sOynS6waKz1t9TcrOuDvOuqD0/kTIxM6h1SPEAjOaArZot+laEsaBXmlL6FiFa4fnT/TubxkxSQT2tu9aaQQ8Q==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@lit-protocol/types@3.0.14:
+    resolution: {integrity: sha512-KmTn9PI5IsN/kCPKkR7LzhqUJxHSlGrPuKTTRXUBnj/+QE5WQ3WfaXoyiMfLDv9yMk8bH+zlzM+1e4q5O7huCg==}
+    dependencies:
+      '@lit-protocol/auth-helpers': 3.0.14(ethers@5.7.2)
+      ethers: 5.7.2
+      jszip: 3.10.1
+      siwe: 2.1.4(ethers@5.7.2)
+      siwe-recap: 0.0.2-alpha.0(ethers@5.7.2)
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
     dev: false
 
   /@lit-protocol/types@3.0.2:

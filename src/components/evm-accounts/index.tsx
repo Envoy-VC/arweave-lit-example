@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Input } from 'antd';
 import type {
 	UnifiedAccessControlConditions,
+	ConditionType,
 	AccsRegularParams,
 } from '@lit-protocol/types';
 import { useUploadStore } from '~/stores';
@@ -17,6 +18,7 @@ const EVMAccounts = () => {
 		if (address === '') return;
 		try {
 			const condition = {
+				conditionType: 'evmBasic' as ConditionType,
 				contractAddress: '',
 				standardContractType: '',
 				chain: 'ethereum',

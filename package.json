@@ -11,7 +11,7 @@
   "dependencies": {
     "@ant-design/cssinjs": "^1.17.2",
     "@lit-protocol/lit-node-client": "3.0.2",
-    "@lit-protocol/types": "3",
+    "@lit-protocol/types": "^3.0.14",
     "@t3-oss/env-nextjs": "^0.7.1",
     "antd": "^5.10.2",
     "clsx": "^2.0.0",
