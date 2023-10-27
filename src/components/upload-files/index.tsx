@@ -44,9 +44,9 @@ const UploadFiles = () => {
 	return (
 		<div className='flex flex-col gap-4'>
 			<Upload.Dragger {...props}>
-				<div className='rounded-xl border-2 border-dashed border-gray-300  bg-gray-50 p-4 transition-all duration-300 ease-in-out hover:border-blue-500'>
+				<div className='rounded-xl border-2 border-dashed border-gray-300  bg-gray-50 p-4 transition-all duration-300 ease-in-out hover:border-primary'>
 					<div className='flex flex-col items-center justify-center gap-3'>
-						<TbInbox className='text-4xl text-blue-600' />
+						<TbInbox className='text-4xl text-primary' />
 						<p className='text-[1rem]'>Click or drag file to this area to upload</p>
 					</div>
 				</div>

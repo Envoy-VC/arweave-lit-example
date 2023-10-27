@@ -7,13 +7,13 @@ import { Button } from 'antd';
 
 import { useLit } from '~/hooks';
 import { useUploadStore } from '~/stores';
-import { RcFile } from 'antd/es/upload';
+import type { RcFile } from 'antd/es/upload';
 
 const Upload: NextPageWithLayout = () => {
 	const { encryptFile } = useLit();
 	const { image, accessControlConditions } = useUploadStore();
 	return (
-		<div className='m-2 my-24 flex max-w-screen-lg flex-col gap-4 border-2 p-2 sm:mx-auto'>
+		<div className='boxShadow m-2 my-24 flex max-w-screen-lg flex-col gap-4 p-4 rounded-xl sm:mx-auto'>
 			<div className='flex flex-col gap-4'>
 				<div className='text-2xl font-semibold'>Upload Image</div>
 				<UploadFiles />
@@ -22,6 +22,9 @@ const Upload: NextPageWithLayout = () => {
 				<div className='text-2xl font-semibold'>Access Control Conditions</div>
 				<ControlTabs />
 				<Button
+					className='bg-primary'
+					type='primary'
+					size='large'
 					// eslint-disable-next-line @typescript-eslint/no-misused-promises
 					onClick={async () => {
 						if (!image || !accessControlConditions) return;
