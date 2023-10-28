@@ -24,7 +24,7 @@ const Layout = ({ children }: Props) => {
 			<Web3Provider>
 				<NotificationProvider>
 					<AntDesignConfigProvider>
-						<div className={clsx(inter.className)}>
+						<div className={clsx(inter.className, 'min-h-full')}>
 							<Navbar />
 							{children}
 						</div>

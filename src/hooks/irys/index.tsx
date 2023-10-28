@@ -4,8 +4,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { WebIrys } from '@irys/sdk';
-import useLit from '../lit';
-import { useUploadStore } from '~/stores';
 import { polygonMumbai } from 'viem/chains';
 import { ViemConfig, defaultTags } from '~/helpers';
 import { custom, parseEther, createWalletClient } from 'viem';
@@ -16,8 +14,6 @@ interface UploadFileParams {
 }
 
 const useIrys = () => {
-	const { encryptFile } = useLit();
-	const { image } = useUploadStore();
 	const getWebIrys = async (): Promise<WebIrys> => {
 		const { url, token } = ViemConfig.devnetMatic;
 		const client = createWalletClient({
@@ -27,9 +23,8 @@ const useIrys = () => {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			transport: custom(window.ethereum),
 		});
-		if (client.chain.id !== polygonMumbai.id) {
-			await client.switchChain({ id: polygonMumbai.id });
-		}
+
+		await client.switchChain({ id: polygonMumbai.id });
 
 		console.log('client=', client);
 		//@ts-expect-error injected
@@ -83,12 +78,11 @@ const useIrys = () => {
 
 	const fundIfNeeded = async (file: File) => {
 		const webIrys = await getWebIrys();
-		const balance = await webIrys.getLoadedBalance();
-		const price = await webIrys.getPrice(file.size);
+		const balance = (await webIrys.getLoadedBalance()).toNumber();
+		const price = (await webIrys.getPrice(file.size)).toNumber();
+		console.log({ balance: Number(balance), price: Number(price) });
 		if (price > balance) {
-			const fundTx = await webIrys.fund(
-				webIrys.utils.toAtomic(price.minus(balance))
-			);
+			const fundTx = await webIrys.fund(price - balance);
 		}
 	};
 

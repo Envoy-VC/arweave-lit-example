@@ -1,15 +1,30 @@
+import React from 'react';
 import type { ReactElement } from 'react';
 import { Layout } from '~/components';
 import type { NextPageWithLayout } from '../_app';
-import React from 'react';
-import { UploadFiles, ControlTabs } from '~/components';
-import { Button, Input, message } from 'antd';
+import { useSearchParams } from 'next/navigation';
+
 import { useRouter } from 'next/router';
-import { useLit, useIrys } from '~/hooks';
+import { Button, Input, message } from 'antd';
+
+// Stores
 import { useUploadStore } from '~/stores';
+
+// Hooks
+import { useLit, useIrys } from '~/hooks';
+
+// Components
+import { UploadFiles, ControlTabs } from '~/components';
+import { SuccessStep } from '~/components/screens';
+
+// Types
 import type { RcFile } from 'antd/es/upload';
 
 const Upload: NextPageWithLayout = () => {
+	const searchParams = useSearchParams();
+	const hasSuccessParam = searchParams.has('success');
+	const success = searchParams.get('success');
+
 	const { encryptFile } = useLit();
 	const { uploadFile } = useIrys();
 	const router = useRouter();
@@ -36,10 +51,10 @@ const Upload: NextPageWithLayout = () => {
 			const { encryptedFile } = res;
 			const txId = await uploadFile({ encryptedFile, readme });
 			if (!txId) throw new Error('Error uploading file');
-			setTxId(txId);
 			router
 				.push('/upload?success=true')
 				.then(() => reset())
+				.then(() => setTxId(txId))
 				.catch((err) => console.log(err));
 			console.log(txId);
 		} catch (error) {
@@ -48,33 +63,41 @@ const Upload: NextPageWithLayout = () => {
 			setIsUploading(false);
 		}
 	};
-	return (
-		<div className='boxShadow m-2 my-24 flex max-w-screen-lg flex-col gap-4 rounded-xl p-4 sm:mx-auto'>
-			<div className='flex flex-col gap-4'>
-				<div className='text-2xl font-semibold'>Upload Image</div>
-				<UploadFiles />
+
+	if (hasSuccessParam && success === 'true') {
+		return (
+			<div className='m-2 my-24 flex max-w-screen-lg flex-col gap-4 p-4 sm:mx-auto'>
+				<SuccessStep />
 			</div>
-			<div className='flex flex-col gap-4'>
-				<div className='text-2xl font-semibold'>Access Control Conditions</div>
-				<ControlTabs />
-				<Input.TextArea
-					placeholder='Readme for Users'
-					rows={6}
-					onChange={(e) => setReadme(e.target.value)}
-				/>
-				<Button
-					className='bg-primary'
-					type='primary'
-					size='large'
-					disabled={isUploading}
-					// eslint-disable-next-line @typescript-eslint/no-misused-promises
-					onClick={onClick}
-				>
-					Upload
-				</Button>
+		);
+	} else
+		return (
+			<div className='boxShadow m-2 my-24 flex max-w-screen-lg flex-col gap-4 rounded-xl p-4 sm:mx-auto'>
+				<div className='flex flex-col gap-4'>
+					<div className='text-2xl font-semibold'>Upload Image</div>
+					<UploadFiles />
+				</div>
+				<div className='flex flex-col gap-4'>
+					<div className='text-2xl font-semibold'>Access Control Conditions</div>
+					<ControlTabs />
+					<Input.TextArea
+						placeholder='Readme for Users'
+						rows={6}
+						onChange={(e) => setReadme(e.target.value)}
+					/>
+					<Button
+						className='bg-primary'
+						type='primary'
+						size='large'
+						disabled={isUploading}
+						// eslint-disable-next-line @typescript-eslint/no-misused-promises
+						onClick={onClick}
+					>
+						Upload
+					</Button>
+				</div>
 			</div>
-		</div>
-	);
+		);
 };
 
 Upload.getLayout = function getLayout(page: ReactElement) {
