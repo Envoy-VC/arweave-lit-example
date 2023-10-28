@@ -6,13 +6,13 @@ const SEO = () => {
 			title='Encrypted Uploader'
 			description='A simple app that uploads encrypted image files to Arweave using Irys and Lit Protocol'
 			openGraph={{
-				url: 'https://w3-starter.vercel.app',
+				url: 'https://arweave-lit-example.vercel.app/',
 				title: 'Encrypted Uploader',
 				description:
 					'A simple app that uploads encrypted image files to Arweave using Irys and Lit Protocol',
 				images: [
 					{
-						url: 'https://i.ibb.co/YhWLyTb/OG.png',
+						url: 'https://i.ibb.co/r2NYddp/Group-11.png',
 						width: 1200,
 						height: 630,
 						alt: 'Encrypted Uploader OG Image',
