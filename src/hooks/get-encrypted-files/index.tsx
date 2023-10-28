@@ -19,6 +19,7 @@ const useGetEncryptedFiles = () => {
 
 	const refetch = async () => {
 		try {
+			setData([]);
 			setError(null);
 			setIsLoading(true);
 			const res = await fetch('https://devnet.irys.xyz/graphql', {

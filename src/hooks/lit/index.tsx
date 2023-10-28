@@ -12,7 +12,6 @@ interface EncryptFileParams {
 
 interface DecryptFileParams {
 	file: File | Blob;
-	conditions: UnifiedAccessControlConditions;
 }
 
 const useLit = () => {
@@ -87,7 +86,7 @@ const useLit = () => {
 
 	const decryptFile = async ({ file }: DecryptFileParams) => {
 		const res = await connectAndSign();
-		if (!res) return;
+		if (!res) return null;
 		const { client, authSig } = res;
 		try {
 			const res = await LitJsSdk.decryptZipFileWithMetadata({
@@ -96,13 +95,14 @@ const useLit = () => {
 				file,
 			});
 			if (!res) {
-				throw new Error(`Could not decrypt File`);
+				return null;
 			}
 			console.log(res);
 			const { decryptedFile, metadata } = res;
 			return { decryptedFile, metadata };
 		} catch (error) {
 			console.log(error);
+			return null;
 		}
 	};
 
