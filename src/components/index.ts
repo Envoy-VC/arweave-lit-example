@@ -4,6 +4,7 @@ import ControlTabs from './control-tabs';
 import EVMAccounts from './evm-accounts';
 import TokenHolders from './token-holders';
 import CustomConditions from './custom-conditions';
+import TransactionPill from './transaction-pill';
 
 export {
 	Layout,
@@ -12,4 +13,5 @@ export {
 	EVMAccounts,
 	TokenHolders,
 	CustomConditions,
+	TransactionPill,
 };
