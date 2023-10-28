@@ -1,3 +1,4 @@
 import useLit from './lit';
+import useIrys from './irys';
 
-export { useLit };
+export { useLit, useIrys };

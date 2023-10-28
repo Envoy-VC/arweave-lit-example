@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.17.2",
+    "@irys/sdk": "^0.0.4",
     "@lit-protocol/lit-node-client": "3.0.2",
     "@lit-protocol/types": "^3.0.14",
     "@t3-oss/env-nextjs": "^0.7.1",

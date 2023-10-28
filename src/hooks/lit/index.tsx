@@ -7,6 +7,7 @@ import type { UnifiedAccessControlConditions } from '@lit-protocol/types';
 interface EncryptFileParams {
 	file: File;
 	conditions: UnifiedAccessControlConditions;
+	readme?: string;
 }
 
 interface DecryptFileParams {
@@ -57,7 +58,11 @@ const useLit = () => {
 		}
 	};
 
-	const encryptFile = async ({ file, conditions }: EncryptFileParams) => {
+	const encryptFile = async ({
+		file,
+		conditions,
+		readme = '',
+	}: EncryptFileParams) => {
 		const res = await connectAndSign();
 		if (!res) return;
 		const { client, authSig } = res;
@@ -69,9 +74,10 @@ const useLit = () => {
 				chain: 'ethereum',
 				file,
 				litNodeClient: client,
-				readme: 'test',
+				readme,
 			});
-			return res as Blob;
+			const encryptedFile: File = new File([res as Blob], file.name);
+			return { encryptedFile, readme };
 		} catch (error) {
 			console.log(error);
 		}
