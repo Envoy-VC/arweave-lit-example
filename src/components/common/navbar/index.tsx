@@ -1,11 +1,14 @@
 import React from 'react';
+import Link from 'next/link';
+
+// Hooks
 import { useAccount, useConnect } from 'wagmi';
+
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { Button } from 'antd';
 
 // Icons
 import { TbLockCode } from 'react-icons/tb';
-import { Button } from 'antd';
-import Link from 'next/link';
 
 const Navbar = () => {
 	const { connect, connectors } = useConnect();

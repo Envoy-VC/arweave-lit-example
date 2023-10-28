@@ -7,9 +7,6 @@ import { createConfig, configureChains, mainnet, WagmiConfig } from 'wagmi';
 // Connectors
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
-
-import { env } from '~/env.mjs';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
 	[mainnet],
@@ -24,12 +21,6 @@ const config = createConfig({
 			options: {
 				shimDisconnect: true,
 				UNSTABLE_shimOnConnectSelectAccount: true,
-			},
-		}),
-		new WalletConnectConnector({
-			chains,
-			options: {
-				projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
 			},
 		}),
 	],

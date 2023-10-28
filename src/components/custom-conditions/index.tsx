@@ -1,8 +1,12 @@
 import React from 'react';
-import { Input, Button } from 'antd';
-import type { UnifiedAccessControlConditions } from '@lit-protocol/types';
-
+// Stores
 import { useUploadStore } from '~/stores';
+
+// Components
+import { Input, Button } from 'antd';
+
+// Types
+import type { UnifiedAccessControlConditions } from '@lit-protocol/types';
 
 const CustomConditions = () => {
 	const [condition, setCondition] = React.useState<string>('');

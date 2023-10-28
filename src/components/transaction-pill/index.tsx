@@ -1,9 +1,11 @@
 import React from 'react';
-import type { TransactionNode } from '~/hooks/get-encrypted-files';
-import { Image, Skeleton, Button } from 'antd';
+import { Image, Skeleton, Button, message } from 'antd';
 
+// Hooks
 import { useLit } from '~/hooks';
 
+// Types
+import type { TransactionNode } from '~/hooks/get-encrypted-files';
 interface Props {
 	data: TransactionNode;
 }
@@ -32,8 +34,10 @@ const TransactionPill = ({ data }: Props) => {
 				fileName?.value ?? ''
 			);
 			setDecryptedFile(decryptedFile);
+			await message.success('File decrypted successfully');
 		} catch (error) {
 			console.log(error);
+			await message.error('File decryption failed');
 		}
 	};
 

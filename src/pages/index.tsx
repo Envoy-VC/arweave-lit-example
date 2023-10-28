@@ -1,7 +1,7 @@
-import type { ReactElement } from 'react';
-import { Layout } from '~/components';
-import type { NextPageWithLayout } from './_app';
 import Link from 'next/link';
+import { Layout } from '~/components';
+import type { ReactElement } from 'react';
+import type { NextPageWithLayout } from './_app';
 
 // Hooks
 import { useAccount } from 'wagmi';

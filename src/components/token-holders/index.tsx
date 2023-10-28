@@ -1,7 +1,11 @@
 import React from 'react';
 import { Input } from 'antd';
-import type { ConditionType } from '@lit-protocol/types';
+
+// Stores
 import { useUploadStore } from '~/stores';
+
+// Types
+import type { ConditionType } from '@lit-protocol/types';
 
 const TokenHolders = () => {
 	const [contractAddress, setContractAddress] = React.useState<string>('');

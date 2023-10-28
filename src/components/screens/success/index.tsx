@@ -1,11 +1,12 @@
 import React from 'react';
 import Confetti from 'react-confetti';
-
 import { useRouter } from 'next/router';
 
-import { Button, Result } from 'antd';
-
+// Stores
 import { useUploadStore } from '~/stores';
+
+// Components
+import { Button, Result } from 'antd';
 
 const SuccessStep = () => {
 	const router = useRouter();

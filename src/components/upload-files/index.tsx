@@ -1,12 +1,14 @@
 import React from 'react';
-import { Image, message, Upload } from 'antd';
+import { Image, Upload } from 'antd';
 
+// Stores
 import { useUploadStore } from '~/stores';
+
 // Icons
 import { TbInbox } from 'react-icons/tb';
 
 // Types
-import type { UploadProps, UploadFile } from 'antd';
+import type { UploadProps } from 'antd';
 import type { RcFile } from 'antd/es/upload';
 
 const UploadFiles = () => {

@@ -1,6 +1,5 @@
 import * as LitJsSdk from '@lit-protocol/lit-node-client';
 import { checkAndSignAuthMessage } from '@lit-protocol/lit-node-client';
-import { uint8arrayToString } from '@lit-protocol/lit-node-client';
 import { useLitStore } from '~/stores';
 import type { UnifiedAccessControlConditions } from '@lit-protocol/types';
 
@@ -15,7 +14,7 @@ interface DecryptFileParams {
 }
 
 const useLit = () => {
-	const { litClient, authSig, setClient, setAuthSig } = useLitStore();
+	const { setClient, setAuthSig } = useLitStore();
 
 	const connect = async () => {
 		try {

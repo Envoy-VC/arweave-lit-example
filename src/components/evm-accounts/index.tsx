@@ -1,13 +1,20 @@
 import React from 'react';
+
+// Stores
+import { useUploadStore } from '~/stores';
+
+// Components
 import { Button, Input } from 'antd';
+
+// Icons
+import { TbTrashFilled } from 'react-icons/tb';
+
+// Types
 import type {
 	UnifiedAccessControlConditions,
 	ConditionType,
 	AccsRegularParams,
 } from '@lit-protocol/types';
-import { useUploadStore } from '~/stores';
-
-import { TbTrashFilled } from 'react-icons/tb';
 
 const EVMAccounts = () => {
 	const { type, accessControlConditions, setAccessControlConditions } =

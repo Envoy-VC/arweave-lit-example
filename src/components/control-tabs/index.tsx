@@ -1,10 +1,16 @@
 import React from 'react';
-import { Tabs } from 'antd';
-import type { TabPaneProps } from 'antd';
+
+// Stores
 import { useUploadStore } from '~/stores';
+
+// Components
+import { Tabs } from 'antd';
 import EVMAccounts from '../evm-accounts';
 import TokenHolders from '../token-holders';
 import CustomConditions from '../custom-conditions';
+
+// Types
+import type { TabPaneProps } from 'antd';
 
 export interface Tab extends Omit<TabPaneProps, 'tab'> {
 	key: string;
