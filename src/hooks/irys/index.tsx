@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { WebIrys } from '@irys/sdk';
 import useLit from '../lit';
+import { useUploadStore } from '~/stores';
 import { polygonMumbai } from 'viem/chains';
 import { ViemConfig, defaultTags } from '~/helpers';
 import { custom, parseEther, createWalletClient } from 'viem';
@@ -16,6 +17,7 @@ interface UploadFileParams {
 
 const useIrys = () => {
 	const { encryptFile } = useLit();
+	const { image } = useUploadStore();
 	const getWebIrys = async (): Promise<WebIrys> => {
 		const { url, token } = ViemConfig.devnetMatic;
 		const client = createWalletClient({
@@ -79,14 +81,30 @@ const useIrys = () => {
 		return webIrys;
 	};
 
+	const fundIfNeeded = async (file: File) => {
+		const webIrys = await getWebIrys();
+		const balance = await webIrys.getLoadedBalance();
+		const price = await webIrys.getPrice(file.size);
+		if (price > balance) {
+			const fundTx = await webIrys.fund(
+				webIrys.utils.toAtomic(price.minus(balance))
+			);
+		}
+	};
+
 	const uploadFile = async ({
 		encryptedFile,
 		readme = '',
 	}: UploadFileParams) => {
 		const webIrys = await getWebIrys();
-		const tags = [...defaultTags, { name: 'Description', value: readme }];
-
+		const tags = [
+			...defaultTags,
+			{ name: 'Title', value: encryptedFile?.name ?? '' },
+			{ name: 'Description', value: readme },
+			{ name: 'Content-Type', value: encryptedFile?.type ?? '' },
+		];
 		try {
+			await fundIfNeeded(encryptedFile);
 			const receipt = await webIrys.uploadFile(encryptedFile, { tags });
 			console.log(`File uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
 			return receipt.id;

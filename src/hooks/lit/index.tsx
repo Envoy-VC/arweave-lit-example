@@ -76,7 +76,9 @@ const useLit = () => {
 				litNodeClient: client,
 				readme,
 			});
-			const encryptedFile: File = new File([res as Blob], file.name);
+			const encryptedFile: File = new File([res as Blob], file.name, {
+				type: file.type,
+			});
 			return { encryptedFile, readme };
 		} catch (error) {
 			console.log(error);
