@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from 'antd';
-
+import type { ConditionType } from '@lit-protocol/types';
 import { useUploadStore } from '~/stores';
 
 const TokenHolders = () => {
@@ -12,6 +12,7 @@ const TokenHolders = () => {
 		if (contractAddress === '') return;
 		const conditions = [
 			{
+				conditionType: 'evmBasic' as ConditionType,
 				contractAddress: contractAddress,
 				standardContractType: 'ERC721',
 				chain: 'ethereum',

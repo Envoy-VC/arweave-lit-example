@@ -30,8 +30,12 @@ const useGetEncryptedFiles = () => {
 				},
 				body: JSON.stringify({
 					query: `
-						query getEncryptedTransactions($tags: [TagFilter!], $owners: [String!]) {
-							transactions(tags: $tags, owners: $owners) {
+						query getEncryptedTransactions(
+							$tags: [TagFilter!]
+							$owners: [String!]
+							$order: SortOrder
+						) {
+							transactions(tags: $tags, owners: $owners, order: $order) {
 								edges {
 									node {
 										id
@@ -63,6 +67,7 @@ const useGetEncryptedFiles = () => {
 							},
 						],
 						owners: [address],
+						order: 'DESC',
 					},
 				}),
 			});
@@ -105,8 +110,14 @@ const useGetEncryptedFiles = () => {
 							$tags: [TagFilter!]
 							$owners: [String!]
 							$after: String
+							$order: SortOrder
 						) {
-							transactions(tags: $tags, owners: $owners, after: $after) {
+							transactions(
+								tags: $tags
+								owners: $owners
+								after: $after
+								order: $order
+							) {
 								edges {
 									node {
 										id
@@ -139,6 +150,7 @@ const useGetEncryptedFiles = () => {
 							},
 						],
 						owners: [address],
+						order: 'DESC',
 					},
 				}),
 			});

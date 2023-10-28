@@ -23,7 +23,7 @@ const Home: NextPageWithLayout = () => {
 		);
 	} else
 		return (
-			<div className='mx-auto my-24 flex max-w-screen-2xl flex-col gap-8 p-4 sm:p-2'>
+			<div className='mx-auto my-24 flex max-w-[1800px] flex-col gap-8 p-4'>
 				<Link href='/upload' className='flex sm:hidden'>
 					<Button type='primary' className='bg-primary'>
 						Upload
@@ -49,7 +49,7 @@ const Home: NextPageWithLayout = () => {
 						</Button>
 					</div>
 				)}
-				<div className='flex flex-row flex-wrap gap-4'>
+				<div className='flex flex-row flex-wrap items-center gap-4'>
 					{data?.map((item, index) => <TransactionPill key={index} data={item} />)}
 				</div>
 			</div>
