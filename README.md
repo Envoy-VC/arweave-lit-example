@@ -71,6 +71,8 @@ The main aspects of code are located in the Hooks directory.
 
 ## Video Demo 🎥
 
+https://github.com/Envoy-VC/arweave-lit-example/assets/65389981/f789e435-29ef-4655-91e3-7aacf17d95eb
+
 ---
 
 ## 🚀 Getting Started
